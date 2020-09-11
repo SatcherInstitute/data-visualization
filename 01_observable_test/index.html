@@ -13,7 +13,11 @@
       type="text/css"
       href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
     />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
+    />
     <link rel="stylesheet" type="text/css" href="./styles.css" />
   </head>
   <body>
@@ -26,6 +30,12 @@
           >CDC Provisional and final COVID-19 deaths by county and race.</a
         >
       </p>
+      <p>
+        View data for a county by clicking on one of the colored-in / non-grey
+        counties on the map, or by using the "Search for a County" text input
+        just below the map. You may zoom and pan on the map using your mouse or
+        trackpad.
+      </p>
       <div class="observablehq-cell observablehq-viewof-selectedCounty"></div>
 
       <div class="charts">
@@ -35,12 +45,10 @@
 
       <div class="extras">
         <details>
-          <summary>
-            debugging helpers
-          </summary>
-            <div class="observablehq-cell observablehq-map"></div>
-            <div class="observablehq-cell observablehq-selectedCounty"></div>
-            <div class="observablehq-cell observablehq-selectedDatum"></div>
+          <summary>debugging helpers</summary>
+          <div class="observablehq-cell observablehq-map"></div>
+          <div class="observablehq-cell observablehq-selectedCounty"></div>
+          <div class="observablehq-cell observablehq-selectedDatum"></div>
         </details>
       </div>
     </div>
@@ -50,7 +58,7 @@
         Inspector,
       } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
       import notebook from "https://api.observablehq.com/@clhenrick/het-vis-prototype-provisional-covid-19-death-counts-by-coun.js?v=3";
-      
+
       // keep a reference to notebook module
       const main = new Runtime().module(notebook, (name) => {
         if (name === "viewof map")
