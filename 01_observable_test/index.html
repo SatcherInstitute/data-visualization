@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <title>Observable Notebook Embed Test</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+    />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+  </head>
+  <body>
+    <div id="observablehq-54b71d6f" class="observable-cells-container">
+      <h1>Provisional COVID-19 Death Counts by County and Race</h1>
+      <p>
+        Data source:
+        <a
+          href="https://www.cdc.gov/nchs/covid19/covid-19-mortality-data-files.htm"
+          >CDC Provisional and final COVID-19 deaths by county and race.</a
+        >
+      </p>
+      <div class="observablehq-cell observablehq-viewof-selectedCounty"></div>
+
+      <div class="charts">
+        <div class="observablehq-cell observablehq-viewof-map"></div>
+        <div class="observablehq-cell observablehq-charts"></div>
+      </div>
+
+      <div class="extras">
+        <details>
+          <summary>
+            debugging helpers
+          </summary>
+            <div class="observablehq-cell observablehq-map"></div>
+            <div class="observablehq-cell observablehq-selectedCounty"></div>
+            <div class="observablehq-cell observablehq-selectedDatum"></div>
+        </details>
+      </div>
+    </div>
+    <script type="module">
+      import {
+        Runtime,
+        Inspector,
+      } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+      import notebook from "https://api.observablehq.com/@clhenrick/het-vis-prototype-provisional-covid-19-death-counts-by-coun.js?v=3";
+      
+      // keep a reference to notebook module
+      const main = new Runtime().module(notebook, (name) => {
+        if (name === "viewof map")
+          return Inspector.into(
+            "#observablehq-54b71d6f .observablehq-viewof-map"
+          )();
+        if (name === "viewof selectedCounty")
+          return Inspector.into(
+            "#observablehq-54b71d6f .observablehq-viewof-selectedCounty"
+          )();
+        if (name === "charts")
+          return Inspector.into(
+            "#observablehq-54b71d6f .observablehq-charts"
+          )();
+        if (name === "map")
+          return Inspector.into("#observablehq-54b71d6f .observablehq-map")();
+        if (name === "selectedCounty")
+          return Inspector.into(
+            "#observablehq-54b71d6f .observablehq-selectedCounty"
+          )();
+        if (name === "selectedDatum")
+          return Inspector.into(
+            "#observablehq-54b71d6f .observablehq-selectedDatum"
+          )();
+      });
+
+      // override Observable's global `width` value so that charts reference the correct width of their container
+      main.redefine("width", 960);
+    </script>
+  </body>
+</html>
