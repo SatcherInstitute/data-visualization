@@ -32,9 +32,8 @@
       </p>
       <p>
         View data for a county by clicking on one of the colored-in / non-grey
-        counties on the map, or by using the "Search for a County" text input
-        just above the map. You may zoom and pan on the map using your mouse or
-        trackpad.
+        counties on the map, or by using the "Search for a County" text input.
+        You may zoom and pan on the map using your mouse or trackpad.
       </p>
       <div class="observablehq-cell observablehq-viewof-selectedCounty"></div>
 
@@ -49,6 +48,10 @@
           <div class="observablehq-cell observablehq-map"></div>
           <div class="observablehq-cell observablehq-selectedCounty"></div>
           <div class="observablehq-cell observablehq-selectedDatum"></div>
+          <div class="toggle-layout">
+            <input type="checkbox" id="toggle-vis-layout">
+            <label for="toggle-vis-layout">Toggle layout</label>
+          </div>
         </details>
       </div>
     </div>
@@ -58,6 +61,10 @@
         Inspector,
       } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
       import notebook from "https://api.observablehq.com/@clhenrick/het-vis-prototype-provisional-covid-19-death-counts-by-coun.js?v=3";
+
+      const container = document.querySelector(".observable-cells-container");
+      const containerWidth = () => Math.floor(container.clientWidth - 24 * 2);
+      let divisor = 1;
 
       // keep a reference to notebook module
       const main = new Runtime().module(notebook, (name) => {
@@ -84,9 +91,25 @@
             "#observablehq-54b71d6f .observablehq-selectedDatum"
           )();
       });
+      
+      // override Observable's global notebook `width` value so that charts reference the correct width of their container
+      const redefineWidth = () => main.redefine("width", containerWidth() / divisor);
+      window.addEventListener("resize", redefineWidth);
+      redefineWidth();
 
-      // override Observable's global `width` value so that charts reference the correct width of their container
-      main.redefine("width", 960);
+      // setup layout toggle checkbox
+      document.querySelector("#toggle-vis-layout").addEventListener("change", function(event) {
+        container.classList.toggle("side-by-side");
+        document.querySelector(".charts").classList.toggle("side-by-side");
+
+        if (container.classList.contains("side-by-side")) {
+          divisor = 2;
+          redefineWidth();
+        } else {
+          divisor = 1;
+          redefineWidth();
+        }
+      })
     </script>
   </body>
 </html>
