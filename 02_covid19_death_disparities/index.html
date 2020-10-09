@@ -35,39 +35,116 @@
 
       <div id="observablehq-448bb8f0" class="observable-cells-container">
         <div class="table-container">
-          <h2>Top 20 counties with ethnic / racial disparities for <span class="selected-race"></span></h2>
+          <h2>
+            Top 20 counties with ethnic / racial disparities for
+            <span class="selected-race"></span>
+          </h2>
           <div class="observablehq-cell observablehq-viewof-disp"></div>
           <div class="observablehq-cell observablehq-disparityTableView"></div>
+        </div>
+
+        <div>
+          <h2>View data for a specific county</h2>
+          <div
+            class="observablehq-cell observablehq-viewof-selectedCounty"
+          ></div>
+          <div class="observablehq-cell observablehq-disparityChart"></div>
         </div>
       </div>
     </div>
 
-    <div class="custom-table"></div>
+    <div class="custom-table observablehq-cell"></div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script type="module">
-      import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-      import define from "https://api.observablehq.com/d/213f377cfc2f22da.js?v=3";
+      import {
+        Runtime,
+        Inspector,
+        Library
+      } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+      import notebookDisparities from "https://api.observablehq.com/d/213f377cfc2f22da.js?v=3";
+      // import notebookCountyAges from "https://api.observablehq.com/d/1ec3e013ab0fb19a.js?v=3";
+
+      // only doing this to override the `width` var; the grouped bar chart doesn't size correctly otherwise
+      const runtime = new Runtime(Object.assign(new Library, { width: 960 }));
+
+      const raceKeysBase = [
+        "non_hispanic_white",
+        "non_hispanic_black",
+        "non_hispanic_asian",
+        "non_hispanic_american_indian",
+        "hispanic",
+        "other",
+      ];
+      const raceKeysAll = []
+        .concat(raceKeysBase.map((d) => `${d}_pop`))
+        .concat(raceKeysBase.map((d) => `${d}_covid`))
+        .concat(raceKeysBase.map((d) => `${d}_disp`));
+
+      let data;
+      let countyNamesFipsMap;
+      let getDisparityRow;
 
       init();
 
       async function init() {
-        const module = new Runtime().module(define, name => {
-          // returning `true` bypasses the need for rendering the cell in a DOM element
+        const moduleDisp = runtime.module(notebookDisparities, (name) => {
+          // TODO: clean this up using a switch statement, class, etc.
+          // NOTE: returning `true` bypasses the need for rendering the cell in a DOM element, but makes sure it is included
+          // this is useful in case other cells depend on a cell that isn't visually rendered
           if (name === "aqLeftPad") return true;
-          if (name === "viewof disp") return Inspector.into("#observablehq-448bb8f0 .observablehq-viewof-disp")();
-          if (name === "disparityTableView") return Inspector.into("#observablehq-448bb8f0 .observablehq-disparityTableView")();
+          if (name === "viewof disp")
+            return Inspector.into(
+              "#observablehq-448bb8f0 .observablehq-viewof-disp"
+            )();
+          if (name === "disparityTableView")
+            return Inspector.into(
+              "#observablehq-448bb8f0 .observablehq-disparityTableView"
+            )();
           if (name === "getDisparityRow") return true;
           if (name === "disparityData") return true;
-          if (name === "disp") return { fulfilled(value) { setSelectedRace(value); }}
+          if (name === "disp")
+            return {
+              fulfilled(value) {
+                setSelectedRace(value);
+              },
+            };
+          if (name === "viewof selectedCounty")
+            return Inspector.into(
+              "#observablehq-448bb8f0 .observablehq-viewof-selectedCounty"
+            )();
+          if (name === "selectedCounty")
+            return {
+              fulfilled(value) {
+                logCountyData(value);
+              },
+            };
+          if (name === "disparityChart") {
+            return Inspector.into(
+              "#observablehq-448bb8f0 .observablehq-disparityChart"
+            )();
+          }
         });
 
-        const data = await module.value("disparityData");
+        // populate globals
+        data = await moduleDisp.value("disparityData");
+
+        // this is not rendering the chart!
+        async function logCountyData(countyName) {
+          getDisparityRow =
+            getDisparityRow || (await moduleDisp.value("getDisparityRow"));
+          countyNamesFipsMap =
+            countyNamesFipsMap ||
+            (await moduleDisp.value("countyNamesFipsMap"));
+          const fips = countyNamesFipsMap.get(countyName);
+          const datum = getDisparityRow(fips);
+          console.log(fips, datum);
+        }
       }
 
-      function makePrettyTable(data) {
-        // TODO: render a better looking table with more readable headers
-        d3.select(".custom-table")
+      function renderDisparityTable(data) {
+        // TODO: render a better looking table with more readable headers?
+        d3.select(".custom-table");
       }
 
       function setSelectedRace(value) {
