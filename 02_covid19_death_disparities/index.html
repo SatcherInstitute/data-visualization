@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <title>COVID-19 Deaths Racial Disparites</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>COVID-19 Deaths Racial Disparites</h1>
+        <p>
+          Data source:
+          <a
+            href="https://www.cdc.gov/nchs/covid19/covid-19-mortality-data-files.htm"
+            >CDC Provisional and final COVID-19 deaths by county and race.</a
+          >
+        </p>
+      </header>
+
+      <div id="observablehq-448bb8f0" class="observable-cells-container">
+        <div class="table-container">
+          <h2>Top 20 counties with ethnic / racial disparities for <span class="selected-race"></span></h2>
+          <div class="observablehq-cell observablehq-viewof-disp"></div>
+          <div class="observablehq-cell observablehq-disparityTableView"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-table"></div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="module">
+      import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+      import define from "https://api.observablehq.com/d/213f377cfc2f22da.js?v=3";
+
+      init();
+
+      async function init() {
+        const module = new Runtime().module(define, name => {
+          // returning `true` bypasses the need for rendering the cell in a DOM element
+          if (name === "aqLeftPad") return true;
+          if (name === "viewof disp") return Inspector.into("#observablehq-448bb8f0 .observablehq-viewof-disp")();
+          if (name === "disparityTableView") return Inspector.into("#observablehq-448bb8f0 .observablehq-disparityTableView")();
+          if (name === "getDisparityRow") return true;
+          if (name === "disparityData") return true;
+          if (name === "disp") return { fulfilled(value) { setSelectedRace(value); }}
+        });
+
+        const data = await module.value("disparityData");
+      }
+
+      function makePrettyTable(data) {
+        // TODO: render a better looking table with more readable headers
+        d3.select(".custom-table")
+      }
+
+      function setSelectedRace(value) {
+        value = value
+          .replace("non_hispanic_", "non-hispanic ")
+          .replace(/\_/i, " ");
+        d3.select(".selected-race").text(value);
+      }
+    </script>
+  </body>
+</html>
