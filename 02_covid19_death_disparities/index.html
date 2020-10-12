@@ -48,7 +48,7 @@
           <div
             class="observablehq-cell observablehq-viewof-selectedCounty"
           ></div>
-          <div class="observablehq-cell observablehq-disparityChart"></div>
+          <p><em>TO DO ...</em></p>
         </div>
       </div>
     </div>
@@ -60,13 +60,13 @@
       import {
         Runtime,
         Inspector,
-        Library
+        Library,
       } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
       import notebookDisparities from "https://api.observablehq.com/d/213f377cfc2f22da.js?v=3";
       // import notebookCountyAges from "https://api.observablehq.com/d/1ec3e013ab0fb19a.js?v=3";
 
       // only doing this to override the `width` var; the grouped bar chart doesn't size correctly otherwise
-      const runtime = new Runtime(Object.assign(new Library, { width: 960 }));
+      const runtime = new Runtime(Object.assign(new Library(), { width: 960 }));
 
       const raceKeysBase = [
         "non_hispanic_white",
@@ -109,6 +109,8 @@
                 setSelectedRace(value);
               },
             };
+
+          // relating to "view data for a specific county"
           if (name === "viewof selectedCounty")
             return Inspector.into(
               "#observablehq-448bb8f0 .observablehq-viewof-selectedCounty"
@@ -119,26 +121,30 @@
                 logCountyData(value);
               },
             };
-          if (name === "disparityChart") {
-            return Inspector.into(
-              "#observablehq-448bb8f0 .observablehq-disparityChart"
-            )();
+          if (name === "selectedCountyData")
+            return {
+              fulfilled(value) {
+                logCountyData(value);
+              },
+            };
+          if (name === "maxCountyDisp") {
+            return {
+              fulfilled(value) {
+                logMaxCountyDisparity(value);
+              },
+            };
           }
         });
 
         // populate globals
         data = await moduleDisp.value("disparityData");
 
-        // this is not rendering the chart!
-        async function logCountyData(countyName) {
-          getDisparityRow =
-            getDisparityRow || (await moduleDisp.value("getDisparityRow"));
-          countyNamesFipsMap =
-            countyNamesFipsMap ||
-            (await moduleDisp.value("countyNamesFipsMap"));
-          const fips = countyNamesFipsMap.get(countyName);
-          const datum = getDisparityRow(fips);
-          console.log(fips, datum);
+        function logCountyData(data) {
+          console.log(data);
+        }
+
+        function logMaxCountyDisparity(data) {
+          console.log(data);
         }
       }
 
