@@ -78,11 +78,13 @@ async function init() {
   data = await moduleDisp.value("disparityData");
 
   function logSelectedCounty(countyName) {
+    d3.selectAll(".selected-county").text(countyName);
     console.log(countyName);
   }
 
   function logCountyData(data) {
     console.log(data);
+    renderCountyDisparityTable(data);
   }
 
   function logMaxCountyDisparity(data) {
@@ -90,9 +92,58 @@ async function init() {
   }
 }
 
-function renderDisparityTable(data) {
-  // TODO: render a better looking table with more readable headers?
-  d3.select(".custom-table");
+// maybe break this up into separate tables for population & disparities?
+function renderCountyDisparityTable(datum) {
+  const columns = new Set(
+    ["all_deaths_total", "covid_19_deaths_total"]
+      .concat(raceKeysBase.map((key) => `${key}_pop`))
+      .concat(raceKeysBase.map((key) => `${key}_disp`))
+  );
+
+  const transformed = Object.keys(datum)
+    .filter((key) => columns.has(key))
+    .reduce((acc, key) => {
+      const o = {};
+      o[key] = datum[key];
+      acc = [...acc, o];
+      return acc;
+    }, []);
+
+  console.log(transformed);
+
+  const table = d3.select(".custom-table");
+  const header = table.append("thead");
+  const body = table.append("tbody");
+
+  // header
+  //   .append("tr")
+  //   .selectAll(".header-cell")
+  //   .data(columns)
+  //   .join("th")
+  //   .classed("header-cell", true)
+  //   .text((d) => d);
+
+  body
+    .selectAll(".row")
+    .data(transformed)
+    .join("tr")
+    .classed("row", true)
+    .each(function (d, i) {
+      const row = d3.select(this);
+      const label = Object.keys(d);
+      const value = Object.values(d);
+      console.log(isFloat(value));
+      row.append("td").classed("cell", true).text(label);
+      row
+        .append("td")
+        .classed("cell", true)
+        .text(isFloat(value) ? d3.format(".4f")(value) : value);
+    });
+}
+
+function isFloat(value) {
+  if (isNaN(value)) return false;
+  return typeof +value === "number" && +value % 1 !== 0;
 }
 
 function setSelectedRace(value) {
