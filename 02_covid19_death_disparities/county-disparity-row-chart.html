@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <title>COVID-19 Deaths Racial Disparites</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./county-disparity-row-chart.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>COVID-19 Racial/Ethnic Mortality Disparities</h1>
+        <p>
+          Data source:
+          <a
+            href="https://www.cdc.gov/nchs/covid19/covid-19-mortality-data-files.htm"
+            >CDC Provisional and final COVID-19 deaths by county and race.</a
+          >
+        </p>
+      </header>
+
+      <div id="observablehq-7447150c">
+        <div class="observablehq-viewof-selectedCounty"></div>
+        <div class="observablehq-rowBarChart"></div>
+      </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="module" src="./county-disparity-row-chart.js"></script>
+  </body>
+</html>
