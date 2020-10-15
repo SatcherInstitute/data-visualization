@@ -29,6 +29,10 @@ td {
   margin: 0 auto;
 }
 
-.observablehq-cell {
+input[name="input"] {
+  width: 225px;
+}
+
+div[class^="observablehq-"] {
   margin: 1rem 0;
 }
