@@ -5,6 +5,8 @@ Visualizing racial / ethnic disparities in COVID-19 deaths at the county level. 
 
 - [Top Twenty Table](./top-twenty-table.html)
 
-- [Disparities in a Single County](./county-disparity.html)
+- [Disparities in a Single County (small tables)](./county-disparity.html)
+
+- [Disparities in a single County (Bar Chart)](./county-disparity-row-chart.html)
 
 - [Greatest Disparity for all Counties](./max-disparity-counties.html)
