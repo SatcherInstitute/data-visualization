@@ -36,3 +36,7 @@ input[name="input"] {
 div[class^="observablehq-"] {
   margin: 1rem 0;
 }
+
+div.observablehq-tables {
+  margin-top: 48px;
+}

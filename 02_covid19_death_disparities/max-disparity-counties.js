@@ -20,14 +20,6 @@ async function init() {
       return Inspector.into(
         "#observablehq-7447150c .observablehq-maxDisparityByCountyBar"
       )();
-    if (name === "raceColorScale")
-      return Inspector.into(
-        "#observablehq-7447150c .observablehq-raceColorScale"
-      )();
-    if (name === "maxDisparityByCounty")
-      return Inspector.into(
-        "#observablehq-7447150c .observablehq-maxDisparityByCounty"
-      )();
     if (name === "maxDisparityHoveredText")
       return Inspector.into(
         "#observablehq-7447150c .observablehq-maxDisparityHoveredText"
@@ -35,10 +27,6 @@ async function init() {
     if (name === "viewof maxDisparityChoropleth")
       return Inspector.into(
         "#observablehq-7447150c .observablehq-viewof-maxDisparityChoropleth"
-      )();
-    if (name === "maxDisparityChoropleth")
-      return Inspector.into(
-        "#observablehq-7447150c .observablehq-maxDisparityChoropleth"
       )();
     if (name === "augmentAq") return true;
   });

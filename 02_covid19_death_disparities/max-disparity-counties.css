@@ -29,6 +29,6 @@ td {
   margin: 0 auto;
 }
 
-.observablehq-cell {
+div[class^="observablehq-"] {
   margin: 1rem 0;
 }
