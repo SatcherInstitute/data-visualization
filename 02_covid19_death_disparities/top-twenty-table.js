@@ -32,10 +32,6 @@ async function init() {
       return Inspector.into(
         "#observablehq-448bb8f0 .observablehq-viewof-disp"
       )();
-    // if (name === "disparityTableView")
-    //   return Inspector.into(
-    //     "#observablehq-448bb8f0 .observablehq-disparityTableView"
-    //   )();
     if (name === "getDisparityRow") return true;
     if (name === "disparityData") return true;
     if (name === "disparityTableTop20") {
@@ -63,40 +59,45 @@ function renderTopTwentyTable(table) {
     .objects()
     .slice(0, 20)
     .map((d, i) => parseRow(d, i, selectedRace));
-  console.log(data);
+
+  const columns = [
+    "rank",
+    "county name",
+    "state",
+    `${prettifyRaceKey(selectedRace)} disparity`,
+    `${prettifyRaceKey(selectedRace)} % population`,
+    `${prettifyRaceKey(selectedRace)} % COVID-19 deaths`,
+    "total all cause deaths",
+    "total COVID-19 deaths",
+    "urban/rural",
+  ];
 
   const tableSel = d3.select(".table-pretty > table");
 
   tableSel
-    .append("thead")
-    .append("tr")
+    .select("thead tr")
     .selectAll("th")
-    .data(Object.keys(data[0]), (d) => d)
-    .join(
-      (enter) => enter.append("th"),
-      (update) => update,
-      (exit) => exit.remove()
-    )
+    .data(columns)
+    .join("th")
     .text((d) => d);
 
   tableSel
-    .append("tbody")
+    .select("tbody")
     .selectAll("tr")
     .data(data, (d) => d.fips)
     .join(
-      (enter) => enter.append("tr"),
-      (update) => update,
+      (enter) => enter.append("tr").each(renderRow),
+      (update) => update.each(renderRow),
       (exit) => exit.remove()
-    )
-    .each(renderRow)
-    .filter(":nth-child(even)")
-    .style("background-color", "#e2e2e2");
+    );
 
-  function renderRow(datum, index) {
-    const row = d3.select(this);
-    Object.values(datum).forEach((value) => {
-      row.append("td").text(value);
-    });
+  function renderRow(datum) {
+    const cellData = columns.map((key) => datum[key]);
+    d3.select(this)
+      .selectAll("td")
+      .data(cellData, (d) => d)
+      .join("td")
+      .text((d) => d);
   }
 }
 
@@ -115,7 +116,7 @@ function parseRow(d, index, selectedRace) {
     "county name": county_name,
     state,
     "urban/rural": urbanruraldesc,
-    "total deaths": all_deaths_total,
+    "total all cause deaths": all_deaths_total,
     "total COVID-19 deaths": covid_19_deaths_total,
     [`${prettifyRaceKey(selectedRace)} disparity`]: formatDec2(
       d[`${selectedRace}_disp`]
@@ -131,12 +132,11 @@ function parseRow(d, index, selectedRace) {
 
 function prettifyRaceKey(key) {
   return key
-    .replace(/non_hispanic/gi, " ")
+    .replace(/non_hispanic/gi, "")
     .replace(/_/gi, " ")
     .trim();
 }
 
 function setSelectedRace(value) {
-  value = value.replace("non_hispanic_", "non-hispanic ").replace(/\_/i, " ");
-  d3.select(".selected-race").text(value);
+  d3.select(".selected-race").text(prettifyRaceKey(value));
 }

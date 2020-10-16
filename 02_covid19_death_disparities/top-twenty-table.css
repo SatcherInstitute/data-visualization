@@ -29,8 +29,9 @@ td {
   margin: 0 auto;
 }
 
-.observablehq-cell {
-  margin: 1rem 0;
+div[class^="observablehq-"],
+.table-pretty {
+  margin: 2rem 0;
 }
 
 .table-pretty {
@@ -39,6 +40,7 @@ td {
   border: 1px solid #333;
   overflow-y: auto;
   overflow-x: auto;
+  padding-right: 12px;
 }
 
 .table-pretty table {
@@ -53,6 +55,10 @@ td {
   overflow: auto;
 } */
 
+.table-pretty table tbody tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
 /* .table-pretty table thead {
   display: block;
 }
@@ -62,6 +68,7 @@ td {
 } */
 
 .table-pretty table thead tr {
+  text-transform: capitalize;
   border-bottom: 1px solid #ccc;
 }
 
