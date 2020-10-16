@@ -17,7 +17,8 @@ const raceKeysBase = [
   "other",
 ];
 
-let data;
+const formatDec2 = d3.format(".2f");
+const formatPct1 = d3.format(".1%");
 
 init();
 
@@ -31,12 +32,19 @@ async function init() {
       return Inspector.into(
         "#observablehq-448bb8f0 .observablehq-viewof-disp"
       )();
-    if (name === "disparityTableView")
-      return Inspector.into(
-        "#observablehq-448bb8f0 .observablehq-disparityTableView"
-      )();
+    // if (name === "disparityTableView")
+    //   return Inspector.into(
+    //     "#observablehq-448bb8f0 .observablehq-disparityTableView"
+    //   )();
     if (name === "getDisparityRow") return true;
     if (name === "disparityData") return true;
+    if (name === "disparityTableTop20") {
+      return {
+        fulfilled(value) {
+          renderTopTwentyTable(value);
+        },
+      };
+    }
     if (name === "disp")
       return {
         fulfilled(value) {
@@ -44,23 +52,88 @@ async function init() {
         },
       };
   });
+}
 
-  // populate globals
-  data = await moduleDisp.value("disparityData");
+function renderTopTwentyTable(table) {
+  const selectedRace = d3
+    .select(".observablehq-viewof-disp select")
+    .property("value");
 
-  function logSelectedCounty(countyName) {
-    d3.selectAll(".selected-county").text(countyName);
-    console.log(countyName);
+  const data = table
+    .objects()
+    .slice(0, 20)
+    .map((d, i) => parseRow(d, i, selectedRace));
+  console.log(data);
+
+  const tableSel = d3.select(".table-pretty > table");
+
+  tableSel
+    .append("thead")
+    .append("tr")
+    .selectAll("th")
+    .data(Object.keys(data[0]), (d) => d)
+    .join(
+      (enter) => enter.append("th"),
+      (update) => update,
+      (exit) => exit.remove()
+    )
+    .text((d) => d);
+
+  tableSel
+    .append("tbody")
+    .selectAll("tr")
+    .data(data, (d) => d.fips)
+    .join(
+      (enter) => enter.append("tr"),
+      (update) => update,
+      (exit) => exit.remove()
+    )
+    .each(renderRow)
+    .filter(":nth-child(even)")
+    .style("background-color", "#e2e2e2");
+
+  function renderRow(datum, index) {
+    const row = d3.select(this);
+    Object.values(datum).forEach((value) => {
+      row.append("td").text(value);
+    });
   }
+}
 
-  function logCountyData(data) {
-    console.log(data);
-    renderCountyDisparityTable(data);
-  }
+function parseRow(d, index, selectedRace) {
+  const {
+    fips,
+    county_name,
+    state,
+    urbanruraldesc,
+    all_deaths_total,
+    covid_19_deaths_total,
+  } = d;
+  return {
+    rank: index + 1,
+    fips,
+    "county name": county_name,
+    state,
+    "urban/rural": urbanruraldesc,
+    "total deaths": all_deaths_total,
+    "total COVID-19 deaths": covid_19_deaths_total,
+    [`${prettifyRaceKey(selectedRace)} disparity`]: formatDec2(
+      d[`${selectedRace}_disp`]
+    ),
+    [`${prettifyRaceKey(selectedRace)} % population`]: formatPct1(
+      d[`${selectedRace}_pop`]
+    ),
+    [`${prettifyRaceKey(selectedRace)} % COVID-19 deaths`]: formatPct1(
+      d[`${selectedRace}_covid`]
+    ),
+  };
+}
 
-  function logMaxCountyDisparity(data) {
-    console.log(data);
-  }
+function prettifyRaceKey(key) {
+  return key
+    .replace(/non_hispanic/gi, " ")
+    .replace(/_/gi, " ")
+    .trim();
 }
 
 function setSelectedRace(value) {
