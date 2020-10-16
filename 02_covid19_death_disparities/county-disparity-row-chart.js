@@ -16,10 +16,17 @@ async function init() {
       return Inspector.into(
         "#observablehq-7447150c .observablehq-viewof-selectedCounty"
       )();
+
     if (name === "rowBarChart")
       return Inspector.into(
         "#observablehq-7447150c .observablehq-rowBarChart"
       )();
+
+    if (name === "disparityText")
+      return Inspector.into(
+        "#observablehq-7447150c .observablehq-disparityText"
+      )();
+
     if (name === "augmentAq") return true;
   });
 }
