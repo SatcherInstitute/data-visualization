@@ -16,11 +16,18 @@ async function init() {
       return Inspector.into(
         "#observablehq-7447150c .observablehq-viewof-selectedCounty"
       )();
+
+    if (name === "selectedCounty") {
+      return true;
+    }
+
     if (name === "tables")
       return Inspector.into("#observablehq-7447150c .observablehq-tables")();
+
     if (name === "dtLegend") {
       return Inspector.into("#observablehq-7447150c .observablehq-dtLegend")();
     }
+
     if (name === "augmentAq") return true;
   });
 }
