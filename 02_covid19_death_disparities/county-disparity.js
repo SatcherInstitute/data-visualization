@@ -10,16 +10,22 @@ const runtime = new Runtime(Object.assign(new Library(), { width: 960 }));
 
 init();
 
-async function init() {
-  runtime.module(notebook, (name) => {
+export async function init() {
+  const mod = runtime.module(notebook, (name) => {
     if (name === "viewof selectedCounty")
       return Inspector.into(
         "#observablehq-7447150c .observablehq-viewof-selectedCounty"
       )();
 
     if (name === "selectedCounty") {
-      return true;
+      return {
+        fulfilled(value) {
+          renderSelectedCounty(value);
+        },
+      };
     }
+
+    if (name === "defaultCounty") return true;
 
     if (name === "tables")
       return Inspector.into("#observablehq-7447150c .observablehq-tables")();
@@ -30,4 +36,13 @@ async function init() {
 
     if (name === "augmentAq") return true;
   });
+
+  async function renderSelectedCounty(value) {
+    const el = d3.select(".observablehq-selectedCounty");
+    if (value) {
+      el.text(value);
+    } else {
+      el.text(await mod.value("defaultCounty"));
+    }
+  }
 }

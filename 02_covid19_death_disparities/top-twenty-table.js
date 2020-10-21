@@ -23,7 +23,7 @@ const formatPct1 = d3.format(".1%");
 init();
 
 async function init() {
-  const moduleDisp = runtime.module(notebookDisparities, (name) => {
+  runtime.module(notebookDisparities, (name) => {
     // TODO: clean this up using a switch statement, class, etc.
     // NOTE: returning `true` bypasses the need for rendering the cell in a DOM element, but makes sure it is included
     // this is useful in case other cells depend on a cell that isn't visually rendered
@@ -50,7 +50,7 @@ async function init() {
   });
 }
 
-function renderTopTwentyTable(table) {
+export function renderTopTwentyTable(table) {
   const selectedRace = d3
     .select(".observablehq-viewof-disp select")
     .property("value");
@@ -137,6 +137,6 @@ function prettifyRaceKey(key) {
     .trim();
 }
 
-function setSelectedRace(value) {
+export function setSelectedRace(value) {
   d3.select(".selected-race").text(prettifyRaceKey(value));
 }

@@ -10,7 +10,7 @@ const runtime = new Runtime(Object.assign(new Library(), { width: 960 }));
 
 init();
 
-async function init() {
+export function init() {
   runtime.module(notebook, (name) => {
     if (name === "viewof selectedCounty")
       return Inspector.into(

@@ -10,7 +10,7 @@ const runtime = new Runtime(Object.assign(new Library(), { width: 960 }));
 
 init();
 
-async function init() {
+export async function init() {
   runtime.module(notebook, (name) => {
     if (name === "maxDisparityLegend")
       return Inspector.into(

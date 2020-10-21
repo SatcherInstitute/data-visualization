@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+hr {
+  margin: 48px 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td {
+  /* padding: 0.25rem; */
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.container {
+  padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+div[class^="observablehq-"],
+.table-pretty {
+  margin: 2rem 0;
+}
+
+.table-pretty {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #333;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding-right: 12px;
+}
+
+.table-pretty table {
+  font-size: 14px;
+}
+
+.table-pretty table tbody tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
+.table-pretty table thead tr {
+  text-transform: capitalize;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-pretty table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+
+.table-pretty table th,
+.table-pretty table td {
+  padding: 2px 6px;
+  text-align: left;
+  width: 100px;
+}
