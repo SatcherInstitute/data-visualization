@@ -14,7 +14,7 @@ export function init() {
   runtime.module(notebook, (name) => {
     if (name === "viewof selectedCounty")
       return Inspector.into(
-        "#observablehq-7447150c .observablehq-viewof-selectedCounty"
+        "#observablehq-7447150c .observablehq-viewof-selectedCounty2"
       )();
 
     if (name === "rowBarChart")

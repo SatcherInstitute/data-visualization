@@ -29,6 +29,10 @@ td {
   margin: 0 auto;
 }
 
+input[name="input"] {
+  width: 225px;
+}
+
 div[class^="observablehq-"],
 .table-pretty {
   margin: 2rem 0;
