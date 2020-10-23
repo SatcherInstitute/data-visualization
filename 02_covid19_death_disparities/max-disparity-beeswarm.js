@@ -14,7 +14,7 @@ export async function init() {
   runtime.module(notebook, (name) => {
     if (name === "viewof maxDisparityLegend")
       return Inspector.into(
-        "#observablehq-7447150c .observablehq-viewof-maxDisparityLegend"
+        "#observablehq-7447150c .observablehq-viewof-maxDisparityLegend2"
       )();
     if (name === "beeswarm")
       return Inspector.into("#observablehq-7447150c .observablehq-beeswarm")();

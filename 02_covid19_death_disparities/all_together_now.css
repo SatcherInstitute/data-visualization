@@ -38,6 +38,10 @@ div[class^="observablehq-"],
   margin: 2rem 0;
 }
 
+div.observablehq-viewof-maxDisparityLegend2 {
+  display: none;
+}
+
 .table-pretty {
   width: 100%;
   height: 500px;
