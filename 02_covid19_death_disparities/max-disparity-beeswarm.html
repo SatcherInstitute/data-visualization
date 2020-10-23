@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <title>COVID-19 Deaths Racial Disparites</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./max-disparity-beeswarm.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>COVID-19 Racial/Ethnic Mortality Disparities</h1>
+        <p>
+          Data source:
+          <a
+            href="https://www.cdc.gov/nchs/covid19/covid-19-mortality-data-files.htm"
+            >CDC Provisional and final COVID-19 deaths by county and race.</a
+          >
+        </p>
+      </header>
+
+      <h2>Highest COVID-19 Mortality Disparity, All Counties, Bee Swarm Plot</h2>
+      <p>
+        <em
+          >*Note: <strong>disparity</strong> is the ratio of percentage of
+          COVID-19 related deaths to the percentage of the total population for
+          a given racial/ethnic group.</em
+        >
+      </p>
+
+      <div id="observablehq-7447150c">
+        <div class="observablehq-beeswarm"></div>
+        <p style="margin-bottom: 0;">You may click on a race/ethnicity category to filter the chart.</p>
+        <div class="observablehq-viewof-maxDisparityLegend"></div>
+      </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="module" src="./max-disparity-beeswarm.js"></script>
+  </body>
+</html>
