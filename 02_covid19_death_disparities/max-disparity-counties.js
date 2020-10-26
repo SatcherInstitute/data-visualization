@@ -20,6 +20,8 @@ export async function init() {
       return Inspector.into(
         "#observablehq-7447150c .observablehq-maxDisparityByCountyBar"
       )();
+    if (name === "beeswarm")
+      return Inspector.into("#observablehq-7447150c .observablehq-beeswarm")();
     if (name === "maxDisparityHoveredText")
       return Inspector.into(
         "#observablehq-7447150c .observablehq-maxDisparityHoveredText"
