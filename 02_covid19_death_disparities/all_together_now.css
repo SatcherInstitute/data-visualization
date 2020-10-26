@@ -29,7 +29,7 @@ td {
   margin: 0 auto;
 }
 
-input[name="input"] {
+input[type="text"] {
   width: 225px;
 }
 
