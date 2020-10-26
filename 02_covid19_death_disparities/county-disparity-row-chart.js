@@ -27,6 +27,16 @@ export function init() {
         "#observablehq-7447150c .observablehq-disparityText"
       )();
 
+    if (name === "viewof toggleBarPct")
+      return Inspector.into(
+        "#observablehq-7447150c .observablehq-viewof-toggleBarPct"
+      )();
+
+    if (name === "viewof proportionGuide")
+      return Inspector.into(
+        "#observablehq-7447150c .observablehq-viewof-proportionGuide"
+      )();
+
     if (name === "augmentAq") return true;
   });
 }
