@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <title>COVID-19 Deaths Racial Disparites</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./all_together_now.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>COVID-19 Racial/Ethnic Mortality Disparities</h1>
+        <p>
+          Data source:
+          <a
+            href="https://www.cdc.gov/nchs/covid19/covid-19-mortality-data-files.htm"
+            >CDC Provisional and final COVID-19 deaths by county and race.</a
+          >
+        </p>
+      </header>
+
+      <hr>
+
+      <!-- Top Twenty Counties Table -->
+      <div id="observablehq-448bb8f0" class="observable-cells-container">
+        <div class="table-container">
+          <h2>
+            Top 20 counties with the highest ethnic/racial disparities for
+            people classified as <span class="selected-race"></span>
+          </h2>
+        <p>
+          <em
+            >*Note: <strong>disparity</strong> is the ratio of percentage of COVID-19 related deaths to
+            the percentage of the total population for a given racial/ethnic
+            group.</em
+          >
+        </p>
+          <div class="observablehq-cell observablehq-viewof-disp"></div>
+          <div class="table-pretty">
+            <table>
+              <thead>
+                <tr></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <hr>
+
+      <div id="observablehq-7447150c">
+        <!-- Single county disparity -->
+        <h2>Single County Disparities, Small Tables</h2>
+        <p>
+          You may choose a county in the dataset using the select menu below.
+          Deleting text and typing the name of a county or state
+          abbreviation will show a list of matching counties to select from.
+        </p>
+        <div class="observablehq-viewof-selectedCounty"></div>
+        <h3 class="observablehq-selectedCounty"></h3>
+        <div class="observablehq-dtLegend"></div>
+        <div class="observablehq-tables"></div>
+        <p>
+          <em
+            >*Note: <strong>disparity</strong> is the ratio of percentage of COVID-19 related deaths to
+            the percentage of the total population for a given racial/ethnic
+            group.</em
+          >
+        </p>
+
+        <hr>
+
+        <!-- Single County disparities, row chart -->
+        <h2>Single County Disparities, Bar Chart</h2>
+        <div class="observablehq-viewof-selectedCounty2"></div>
+        <div class="observablehq-disparityText"></div>
+        <div class="observablehq-rowBarChart"></div>
+
+        <hr>
+
+        <!-- All counties disparity bar chart & map -->
+        <h2>Highest COVID-19 Mortality Disparity For All Counties</h2>
+        <p>You may scroll within the bar chart below to view more counties.</p>
+
+        <div class="observablehq-maxDisparityByCountyBar"></div>
+        <div class="observablehq-viewof-maxDisparityLegend"></div>
+
+        <div class="observablehq-beeswarm"></div>
+        <div class="observablehq-viewof-maxDisparityLegend2"></div>
+
+        <p>
+          You may zoom and pan on the map below as well as hover on a county to
+          view its disparity ratio.
+        </p>
+
+        <div class="observablehq-maxDisparityHoveredText"></div>
+        <div class="observablehq-viewof-maxDisparityChoropleth"></div>
+      </div>
+
+    </div>
+
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="module" src="./all_together_now.js"></script>
+  </body>
+</html>

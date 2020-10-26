@@ -9,7 +9,7 @@ body {
 }
 
 hr {
-  margin: 24px 0;
+  margin: 48px 0;
 }
 
 table {
@@ -29,9 +29,17 @@ td {
   margin: 0 auto;
 }
 
+input[name="input"] {
+  width: 225px;
+}
+
 div[class^="observablehq-"],
 .table-pretty {
   margin: 2rem 0;
+}
+
+div.observablehq-viewof-maxDisparityLegend2 {
+  display: none;
 }
 
 .table-pretty {

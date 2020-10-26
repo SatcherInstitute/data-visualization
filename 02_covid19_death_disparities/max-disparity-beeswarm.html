@@ -21,7 +21,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="./max-disparity-counties.css"
+      href="./max-disparity-beeswarm.css"
     />
   </head>
   <body>
@@ -37,7 +37,7 @@
         </p>
       </header>
 
-      <h2>Highest COVID-19 mortality disparity per county</h2>
+      <h2>Highest COVID-19 Mortality Disparity, All Counties, Bee Swarm Plot</h2>
       <p>
         <em
           >*Note: <strong>disparity</strong> is the ratio of percentage of
@@ -45,33 +45,15 @@
           a given racial/ethnic group.</em
         >
       </p>
-      <p>You may scroll within the bar chart below to view more counties.</p>
 
       <div id="observablehq-7447150c">
-        <div class="observablehq-maxDisparityByCountyBar"></div>
-        <p style="margin-bottom: 0">
-          You may click on a race/ethnicity category to filter either chart.
-        </p>
-        <div class="observablehq-viewof-maxDisparityLegend"></div>
-
-        <p>
-          In the chart below, each county in the dataset is represented by a
-          single dot. Dots are colored by the racial/ethnic group with the
-          largest disparity as in the bar chart above.
-        </p>
         <div class="observablehq-beeswarm"></div>
-
-        <p>
-          You may zoom and pan on the map below as well as hover on a county to
-          view its disparity ratio.
-        </p>
-
-        <div class="observablehq-maxDisparityHoveredText"></div>
-        <div class="observablehq-viewof-maxDisparityChoropleth"></div>
+        <p style="margin-bottom: 0;">You may click on a race/ethnicity category to filter the chart.</p>
+        <div class="observablehq-viewof-maxDisparityLegend2"></div>
       </div>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script type="module" src="./max-disparity-counties.js"></script>
+    <script type="module" src="./max-disparity-beeswarm.js"></script>
   </body>
 </html>

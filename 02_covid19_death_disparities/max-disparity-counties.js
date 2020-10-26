@@ -10,16 +10,18 @@ const runtime = new Runtime(Object.assign(new Library(), { width: 960 }));
 
 init();
 
-async function init() {
+export async function init() {
   runtime.module(notebook, (name) => {
-    if (name === "maxDisparityLegend")
+    if (name === "viewof maxDisparityLegend")
       return Inspector.into(
-        "#observablehq-7447150c .observablehq-maxDisparityLegend"
+        "#observablehq-7447150c .observablehq-viewof-maxDisparityLegend"
       )();
     if (name === "maxDisparityByCountyBar")
       return Inspector.into(
         "#observablehq-7447150c .observablehq-maxDisparityByCountyBar"
       )();
+    if (name === "beeswarm")
+      return Inspector.into("#observablehq-7447150c .observablehq-beeswarm")();
     if (name === "maxDisparityHoveredText")
       return Inspector.into(
         "#observablehq-7447150c .observablehq-maxDisparityHoveredText"

@@ -10,23 +10,14 @@ const runtime = new Runtime(Object.assign(new Library(), { width: 960 }));
 
 init();
 
-export function init() {
+export async function init() {
   runtime.module(notebook, (name) => {
-    if (name === "viewof selectedCounty")
+    if (name === "viewof maxDisparityLegend")
       return Inspector.into(
-        "#observablehq-7447150c .observablehq-viewof-selectedCounty2"
+        "#observablehq-7447150c .observablehq-viewof-maxDisparityLegend2"
       )();
-
-    if (name === "rowBarChart")
-      return Inspector.into(
-        "#observablehq-7447150c .observablehq-rowBarChart"
-      )();
-
-    if (name === "disparityText")
-      return Inspector.into(
-        "#observablehq-7447150c .observablehq-disparityText"
-      )();
-
+    if (name === "beeswarm")
+      return Inspector.into("#observablehq-7447150c .observablehq-beeswarm")();
     if (name === "augmentAq") return true;
   });
 }

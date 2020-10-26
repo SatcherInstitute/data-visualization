@@ -10,3 +10,7 @@ Visualizing racial / ethnic disparities in COVID-19 deaths at the county level. 
 - [Disparities in a single County (Bar Chart)](./county-disparity-row-chart.html)
 
 - [Greatest Disparity for all Counties](./max-disparity-counties.html)
+
+- [Greatest Disparity for all Counties, Bee Swarm Plot](./max-disparity-beeswarm.html)
+
+- [All of the above in a single page](./all_together_now.html)
