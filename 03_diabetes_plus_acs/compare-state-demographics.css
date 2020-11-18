@@ -1,3 +1,7 @@
+:root {
+  --header-title-width: 300px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,6 +10,43 @@ body {
   padding: 0;
   margin: 0;
   font-family: sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: #07538f;
+  padding: 24px;
+}
+
+header div.het-page-links {
+  width: calc(100% - var(--header-title-width));
+  display: flex;
+  justify-content: flex-end;
+}
+
+header p,
+header a {
+  color: #fff;
+  font-size: 14px;
+  align-self: flex-end;
+}
+
+header p {
+  display: inline-block;
+  margin: 0;
+  padding-left: 24px;
+  text-transform: uppercase;
+}
+
+header p.het-title {
+  width: var(--header-title-width);
+  font-size: 18px;
+  align-self: flex-start;
+}
+
+header a {
+  text-decoration: none;
 }
 
 hr {
