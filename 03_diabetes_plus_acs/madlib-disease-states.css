@@ -57,6 +57,7 @@ hr {
 table {
   border-collapse: collapse;
   width: 100%;
+  font-size: 12px;
 }
 th,
 td {
@@ -67,11 +68,33 @@ td {
 
 .container {
   padding: 24px;
-  max-width: 960px;
+  /* max-width: 960px; */
   margin: 0 auto;
 }
 
-div[class^="observablehq-"],
-.table-pretty {
-  margin: 2rem 0;
+div[class^="observablehq-"] {
+  margin: 24px 0;
+}
+
+div.the-mad-lib {
+  margin: 0;
+  padding: 0 10px;
+}
+
+div.the-mad-lib p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.columns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.column {
+  max-width: 500px;
+  padding: 0 12px;
+  margin: 0 12px;
 }

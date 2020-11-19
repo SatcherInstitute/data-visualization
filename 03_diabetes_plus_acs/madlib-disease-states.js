@@ -14,9 +14,11 @@ const runtime = new Runtime(
   Object.assign(new Library(), { width: width - padding * 2 })
 );
 
-runtime.module(notebook, (name) => {
+const main = runtime.module(notebook, (name) => {
   if (name === "madlib")
     return Inspector.into("#observablehq-57424c04 .observablehq-madlib")();
+  if (name === "mapTitle")
+    return Inspector.into("#observablehq-57424c04 .observablehq-mapTitle")();
   if (name === "map")
     return Inspector.into("#observablehq-57424c04 .observablehq-map")();
   if (name === "mapLegend")
@@ -34,3 +36,8 @@ runtime.module(notebook, (name) => {
       "#observablehq-57424c04 .observablehq-rowChartState2"
     )();
 });
+
+const columnWidth = 460;
+main.redefine("mapWidth", columnWidth);
+main.redefine("tableWidth", columnWidth);
+main.redefine("chartWidth", columnWidth);
