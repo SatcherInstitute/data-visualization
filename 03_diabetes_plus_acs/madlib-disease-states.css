@@ -67,7 +67,7 @@ td {
 }
 
 .container {
-  padding: 24px;
+  padding: 12px;
   /* max-width: 960px; */
   margin: 0 auto;
 }
@@ -87,14 +87,14 @@ div.the-mad-lib p {
 }
 
 .columns {
+  max-width: 100vw;
+  overflow-x: auto;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-wrap: wrap;
 }
 
 .column {
   max-width: 500px;
   padding: 0 12px;
-  margin: 0 12px;
 }

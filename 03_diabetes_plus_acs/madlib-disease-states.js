@@ -10,9 +10,8 @@ const { width } = document
   .getBoundingClientRect();
 const padding = 24;
 
-const runtime = new Runtime(
-  Object.assign(new Library(), { width: width - padding * 2 })
-);
+const runtime = new Runtime();
+// Object.assign(new Library(), { width: width - padding * 2 })
 
 const main = runtime.module(notebook, (name) => {
   if (name === "madlib")
