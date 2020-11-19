@@ -23,8 +23,11 @@
       type="text/css"
       href="./compare-state-demographics.css"
     />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="./madlib-disease-states.css" />
   </head>
   <body>
@@ -43,29 +46,22 @@
       </div>
     </header>
     <div class="container">
-      <div>
-        <h1>Compare State Demographics</h1>
-        <p>
-          Select two states by clicking on the map below to compare their
-          demographics by race/ethnicity, sex, and age. Selecting on a state
-          that has already been selected will deselect it.
-        </p>
-        <p>
-          Data source:
-          <a
-            target="_blank"
-            href="https://www.census.gov/data/developers/data-sets/acs-5year.html"
-            >U.S. Census ACS 2014 – 2018 5 Year Estimates</a
-          >
-        </p>
-      </div>
       <div id="observablehq-90430437">
+        <div class="observablehq-madlib"></div>
         <div class="observablehq-viewof-selectedStates"></div>
         <div class="observablehq-tableState1"></div>
         <div class="observablehq-tableValuePicker1"></div>
         <div class="observablehq-tableState2"></div>
         <div class="observablehq-tableValuePicker2"></div>
       </div>
+      <p>
+        Data source:
+        <a
+          target="_blank"
+          href="https://www.census.gov/data/developers/data-sets/acs-5year.html"
+          >U.S. Census ACS 2014 – 2018 5 Year Estimates</a
+        >
+      </p>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>

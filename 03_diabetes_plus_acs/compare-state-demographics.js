@@ -15,6 +15,9 @@ const runtime = new Runtime(
 );
 
 runtime.module(notebook, (name) => {
+  if (name === "madlib") {
+    return Inspector.into("#observablehq-90430437 .observablehq-madlib")();
+  }
   if (name === "viewof selectedStates")
     return Inspector.into(
       "#observablehq-90430437 .observablehq-viewof-selectedStates"
