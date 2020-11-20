@@ -1,0 +1,100 @@
+:root {
+  --header-title-width: 300px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: #07538f;
+  padding: 24px;
+}
+
+header div.het-page-links {
+  width: calc(100% - var(--header-title-width));
+  display: flex;
+  justify-content: flex-end;
+}
+
+header p,
+header a {
+  color: #fff;
+  font-size: 14px;
+  align-self: flex-end;
+}
+
+header p {
+  display: inline-block;
+  margin: 0;
+  padding-left: 24px;
+  text-transform: uppercase;
+}
+
+header p.het-title {
+  width: var(--header-title-width);
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  align-self: flex-start;
+}
+
+header a {
+  text-decoration: none;
+}
+
+hr {
+  margin: 24px 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+th,
+td {
+  padding: 0.25rem;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.container {
+  padding: 12px;
+  /* max-width: 960px; */
+  margin: 0 auto;
+}
+
+div[class^="observablehq-"] {
+  margin: 24px 0;
+}
+
+div.the-mad-lib {
+  margin: 0;
+  padding: 0 10px;
+}
+
+div.the-mad-lib p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.columns {
+  max-width: 100vw;
+  overflow-x: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.column {
+  max-width: 500px;
+  padding: 0 12px;
+}

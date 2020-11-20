@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <title>HET: Compare State Demographics</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./compare-state-demographics.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="./madlib-disease-states.css" />
+  </head>
+  <body>
+    <header>
+      <p class="het-title">Health Equity Tracker</p>
+      <div class="het-page-links">
+        <p class="link">
+          <a href="#">About Us</a>
+        </p>
+        <p class="link">
+          <a href="#">Data Sources & Methodology</a>
+        </p>
+        <p class="link">
+          <a href="#">Explore the Data</a>
+        </p>
+      </div>
+    </header>
+    <div class="container">
+      <div id="observablehq-90430437">
+        <div class="observablehq-madlib"></div>
+        <div class="observablehq-viewof-selectedStates"></div>
+        <div class="observablehq-tableState1"></div>
+        <div class="observablehq-tableValuePicker1"></div>
+        <div class="observablehq-tableState2"></div>
+        <div class="observablehq-tableValuePicker2"></div>
+      </div>
+      <p>
+        Data source:
+        <a
+          target="_blank"
+          href="https://www.census.gov/data/developers/data-sets/acs-5year.html"
+          >U.S. Census ACS 2014 – 2018 5 Year Estimates</a
+        >
+      </p>
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="module" src="./compare-state-demographics.js"></script>
+  </body>
+</html>
